@@ -66,8 +66,11 @@ In chapter 8 we consider our first exotic derivative, Continuous Barrier Options
 \begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
 \textbf{8.2:} A stock follows geometric Brownian Motion with time dependent volatility. How will the time dependence affect the price of a down-and-out call? Distinguish between the cases where interest rates are zero and positive. Suppose the knock-out is determined by the forward rate for the same expiry instead of spot price, what happens? 
 \end{tcolorbox}
-\begin{proof}
-    
+    \begin{proof} The core concept is to recall that that we do option derivative pricing, we do so in a \textit{risk neutral} world, where the drift of the GBM becomes the risk-free rate $r$,
+    \begin{align*}
+        \frac{dS_t}{S_t} = rdt + \sigma_t dW_t \tag{1}
+    \end{align*}
+    In the case that interest rates are zero (1) implies $dS_t = S_t\sigma_t dW_t$
 \end{proof}
 
 
@@ -79,7 +82,7 @@ In chapter 8 we consider our first exotic derivative, Continuous Barrier Options
     $$\{\tau_x\leq t\} = \left\{\max_{s\leq t}W_s\geq x\right\}$$
     As these events are the same, they must therefore have the same measure and therefore
     \begin{align*}
-        \mathbb{P}(\tau_x\leq t) = \mathbb{P}(\max_{s\le t} W_s\geq x) &= 2\mathbb{P}(W_t\geq x) \tag{Reflection Principal} \\
+        \mathbb{P}(\tau_x\leq t) = \mathbb{P}\left(\max_{s\le t} W_s\geq x\right) &= 2\mathbb{P}(W_t\geq x) \tag{Reflection Principal} \\
         &= 2\Phi\left(-\frac{x}{\sqrt{t}}\right) \tag{1}
     \end{align*}
     Differentiating (1) we find the density of $\tau_x$ for $t>0$ to be
@@ -90,7 +93,7 @@ In chapter 8 we consider our first exotic derivative, Continuous Barrier Options
 
 
 \begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
-\textbf{8.4:} Explain why increasing volatility can decrease the price of a Barrier option
+\textbf{8.4:} By explaining why increasing volatility can decrease the price of a Barrier option, show that Barrier optiosn can have negative Vega.
 \end{tcolorbox}
 \begin{proof}
     To illustrate this concept, consider a Barrier option struck at $K$ that knocks-out at level $B$. Suppose the option is out of the money. As volatility increases, so does the likelihood of the option expiring in the money, and hence, increases the value of the option as is the case for vanilla options. Suppose know that $K < S_t < B$. As volatility increases, so does the likelihood that $S_t$ will breach the barrier level $B$ over the remaining life of the option, therefore decreasing the price of the option.
@@ -102,15 +105,30 @@ In chapter 8 we consider our first exotic derivative, Continuous Barrier Options
 \begin{proof}
     For digital options that are out of the money, increasing volatility increases the likelhood they expire in the money, and therefore, increase the value of the option. \\
     \\
-    Once the option is in the money however, it does not matter how 'deep' in the money the option expires, the payoff will always be \$1. Thus, price as a function of volatility is increasing up until the strike $K$, and then it does nothing.
+    Once the option is in the money however, it does not matter how 'deep' in the money the option expires, the payoff will always be \$1. Thus, price as a function of volatility is increasing up until the strike $K$, and then it stays flat, as the option will always be exercised the moment it is in the money.
 \end{proof}
 
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{8.11:} Suppose asset prices follow Brownian Motion and there are no interest rates. What can we say about the relative prices of European and American digital options? 
+\end{tcolorbox}
+\begin{proof}
+    The European option pays \$ 1 at expiry if $S_T>K$. As we assume asset prices follow Brownian Motion we therefore have
+    \begin{align*}
+        C_{\text{European}} = \mathbb{P}(S_T>K) = \mathbb{P}(B_T>K)
+    \end{align*}
+    The American digital option will be exercised the instant it becomes in the money. It's price is therefore 
+    \begin{align*}
+        C_{\text{American}} = \mathbb{P}\left(\max_{s\leq t}B_s > K\right) &= 2\mathbb{P}(B_T>K)
+    \end{align*}
+    Thus, American options are twice as valuable as Europeans.
+\end{proof}
 
 \begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
 \textbf{8.12:} If $dX_t = \sigma dW_t$ and $X_0 < L$, give an expression in terms of the cumulative normal, $X_0, \sigma$ and $T$ for 
 $$\mathbb{P}\left(\max_{s\leq t} X_t\leq L\right).$$
 \end{tcolorbox}
-\begin{proof} From Itô's formula we have $X_t = X_0 + W_t$. Therefore 
+\begin{proof} From Itô's formula we have $X_t = X_0 + \sigma xW_t$. Therefore 
 \begin{align*}
     \mathbb{P}\left(\max_{s\leq t} X_t\leq L\right) &= \mathbb{P}\left(\max_{s\leq t} W_t\leq \frac{L-X_0}{\sigma}\right)
 \end{align*}
@@ -120,6 +138,10 @@ $$\mathbb{P}\left(\max_{s\leq t} X_t\leq L\right).$$
     &=1 - 2\Phi\left(\frac{X_0-L}{\sigma\sqrt{t}}\right)
 \end{align*}
 \end{proof}
+
+
+\newpage
+\section{Multi-Look Exotic Options}
 
 
 \newpage
