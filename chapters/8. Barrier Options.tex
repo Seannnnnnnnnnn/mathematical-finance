@@ -1,0 +1,96 @@
+\newpage
+\section{Continuous Barrier Options}
+
+In chapter 8 we consider our first exotic derivative, Continuous Barrier Options. Barrier Options are sometimes referred to as \textit{first generation exotics}, as they are on of the earliest exotic derivatives to be considered, priced and traded. 
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{8.1:} If the price of the knock-in option plus the corresponding knock-out option is not equal to the corresponding vanilla, show that there exists an arbitrage. 
+\end{tcolorbox}
+\begin{proof}
+    By considering payoff diagrams it is clear that options struck at $K$ we must have
+    \begin{align*}
+        \text{Knock-In} + \text{Kock-out} = \text{Vanilla} \tag{1}
+    \end{align*}
+    Suppose that (1) does not hold. Let $P$ denote the portfolio of barrier options, and $C$ the corresponding Vanilla. Without loss of generality, we can assume that all of the options are \textit{Calls}.\\
+    \\
+    First, suppose that $B< C$. If the call option terminates in the money, then we are required to pay $S_T-K>0$. However, regardless of where the barrier level is set, one options in $B$ will also payoff $S_T-K$, hedging out our obligation from being short the vanilla call. In the event that the option expires out of the money, we have no obligation from our  short position, nor gain from our long position. We conclude in either case that the payoff is a riskless $C-B > 0$. \\
+    \\
+    A similar argument can be made in the case where $C < B$. So we conclude by no-arbitrage that (1) must hold.
+\end{proof}
+
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{8.2:} A stock follows geometric Brownian Motion with time dependent volatility. How will the time dependence affect the price of a down-and-out call? Distinguish between the cases where interest rates are zero and positive. Suppose the knock-out is determined by the forward rate for the same expiry instead of spot price, what happens? 
+\end{tcolorbox}
+    \begin{proof} The core concept is to recall that that we do option derivative pricing, we do so in a \textit{risk neutral} world, where the drift of the GBM becomes the risk-free rate $r$,
+    \begin{align*}
+        \frac{dS_t}{S_t} = rdt + \sigma_t dW_t \tag{1}
+    \end{align*}
+    In the case that interest rates are zero (1) implies $dS_t = S_t\sigma_t dW_t$
+\end{proof}
+
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{8.3:} The first passage time to a given level is the first time that Brownian Motion reaches that level. Use the distribution of the maximum to derive the density of the first passage of time. 
+\end{tcolorbox}
+\begin{proof}
+    Let $\tau_x := \inf \{s\leq t: W_t = x\}$. Observe that for $x > 0$ we must have 
+    $$\{\tau_x\leq t\} = \left\{\max_{s\leq t}W_s\geq x\right\}$$
+    As these events are the same, they must therefore have the same measure and therefore
+    \begin{align*}
+        \mathbb{P}(\tau_x\leq t) = \mathbb{P}\left(\max_{s\le t} W_s\geq x\right) &= 2\mathbb{P}(W_t\geq x) \tag{Reflection Principal} \\
+        &= 2\Phi\left(-\frac{x}{\sqrt{t}}\right) \tag{1}
+    \end{align*}
+    Differentiating (1) we find the density of $\tau_x$ for $t>0$ to be
+    $$f_{\tau_x}(t) = \frac{\partial}{\partial t} \mathbb{P}(\tau_x\leq t) = \frac{1}{\sqrt{2\pi}}\frac{x}{t^{3/2}}e^{-x^2/2t}$$
+\end{proof}
+
+
+
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{8.4:} By explaining why increasing volatility can decrease the price of a Barrier option, show that Barrier optiosn can have negative Vega.
+\end{tcolorbox}
+\begin{proof}
+    To illustrate this concept, consider a Barrier option struck at $K$ that knocks-out at level $B$. Suppose the option is out of the money. As volatility increases, so does the likelihood of the option expiring in the money, and hence, increases the value of the option as is the case for vanilla options. Suppose know that $K < S_t < B$. As volatility increases, so does the likelihood that $S_t$ will breach the barrier level $B$ over the remaining life of the option, therefore decreasing the price of the option.
+\end{proof}
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{8.5:} How will increasing the volatility affect the price of an American Digital option?
+\end{tcolorbox}
+\begin{proof}
+    For digital options that are out of the money, increasing volatility increases the likelhood they expire in the money, and therefore, increase the value of the option. \\
+    \\
+    Once the option is in the money however, it does not matter how 'deep' in the money the option expires, the payoff will always be \$1. Thus, price as a function of volatility is increasing up until the strike $K$, and then it stays flat, as the option will always be exercised the moment it is in the money.
+\end{proof}
+
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{8.11:} Suppose asset prices follow Brownian Motion and there are no interest rates. What can we say about the relative prices of European and American digital options? 
+\end{tcolorbox}
+\begin{proof}
+    The European option pays \$ 1 at expiry if $S_T>K$. As we assume asset prices follow Brownian Motion we therefore have
+    \begin{align*}
+        C_{\text{European}} = \mathbb{P}(S_T>K) = \mathbb{P}(B_T>K)
+    \end{align*}
+    The American digital option will be exercised the instant it becomes in the money. It's price is therefore 
+    \begin{align*}
+        C_{\text{American}} = \mathbb{P}\left(\max_{s\leq t}B_s > K\right) &= 2\mathbb{P}(B_T>K)
+    \end{align*}
+    Thus, American options are twice as valuable as Europeans.
+\end{proof}
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{8.12:} If $dX_t = \sigma dW_t$ and $X_0 < L$, give an expression in terms of the cumulative normal, $X_0, \sigma$ and $T$ for 
+$$\mathbb{P}\left(\max_{s\leq t} X_t\leq L\right).$$
+\end{tcolorbox}
+\begin{proof} From Itô's formula we have $X_t = X_0 + \sigma xW_t$. Therefore 
+\begin{align*}
+    \mathbb{P}\left(\max_{s\leq t} X_t\leq L\right) &= \mathbb{P}\left(\max_{s\leq t} W_t\leq \frac{L-X_0}{\sigma}\right)
+\end{align*}
+    We are told $X_0 < L$ so the right hand side of the inequality is positive. We can then apply the reflection principle so 
+\begin{align*}
+    \mathbb{P}\left(\max_{s\leq t} W_t\leq \frac{L-X_0}{\sigma}\right) &= 1-2\mathbb{P}\left(B_t>\frac{L-X_0}{\sigma}\right) \\
+    &=1 - 2\Phi\left(\frac{X_0-L}{\sigma\sqrt{t}}\right)
+\end{align*}
+\end{proof}

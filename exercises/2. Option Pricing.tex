@@ -1,0 +1,33 @@
+\subsection*{Option Pricing}
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{2.1:} Derive the Black-Scholes equation for a stock $S$. What boundary conditions are satisfed at $S=0$ and $S=\infty$ 
+\end{tcolorbox}
+\begin{proof}
+    We consider a European Call option on a non-dividend paying stock $S$. We assume that under the real-world measure $\mathbb{P}$, the evolution of the stock price follows
+    \begin{align*}
+        dS_t = \mu S_tdt + \sigma S_tdW_t \tag{1}
+    \end{align*}
+    By applying Itô's lemma with $g(x) = \ln(x)$ to $(1)$ we can see that 
+    $$S_t = S_0\exp\left(\left(\mu-\frac{\sigma^2}{2}\right)t+\sigma W_t\right) $$
+\end{proof}
+
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{2.4:} Suppose two assets in Black-Scholes world have the same volatility but different drifts. How will the price of the call options compare? Now suppose that one of the assets undergoes downward jumps at random times. How will this affect option prices? 
+\end{tcolorbox}
+\begin{proof}
+    The Black-Scholes equation is derived via risk-neutral pricing. That means that we swap to the \textit{risk-neutral} measure $\mathbb{Q}$ under which the asset prices evolve according to 
+    $$\frac{dS_t}{S_t} = rdt + \sigma dW_t$$
+    That is, the drifts are both transformed to the risk-free rate \textit{r} when we price via Black-Scholes, and thus, the difference in drift terms has no impact on the option price.
+\end{proof}
+
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{2.5:} Suppose an asset has a deterministic time dependent volatility.
+How would I price an option on it using the Black-Scholes theory? How would
+I hedge it?
+\end{tcolorbox}
+\begin{proof}
+    
+\end{proof}
