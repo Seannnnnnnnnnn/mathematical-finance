@@ -1,0 +1,12 @@
+\newpage
+\section{Static Replication}
+The Black-Scholes Model prices options from a dynamic replication argument - it is the price a dealer must pay to continually $\Delta$-hedge over the life of the option. Given that spot-price movements are assumed to be continuous, this would involve an infinite number of trades. 
+In Chapter 10, Joshi presents \textit{Static Replication}, an argument for pricing exotic derivatives when we restrict ourselves to only a finite number of trades. The idea of the chapter is that if we can find a static replicating portfolio for a derivative, then the price of the derivative should be equal to the cost to set up that static portfolio.
+This is a very powerful technique, as it allows you to transform an exotic derivative, whose price and bid-ask spreads are unknown into a portfolio of vanilla options that trade frequently. This idea is explored further in \href{https://emanuelderman.com/wp-content/uploads/1994/04/static_options_replication.pdf}{Emanual Derman's Goldman Sachs research note}.
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{10.1:} A range-accrual option pays \$ 1 at expiry for each day the underlying has spent between two levels. Show that the range accrual can be almost-strong-statically-replicated given deterministic interest rates.
+\end{tcolorbox}
+\begin{proof}
+    The idea is to buy double-digital call options struck at the two levels. 
+\end{proof}

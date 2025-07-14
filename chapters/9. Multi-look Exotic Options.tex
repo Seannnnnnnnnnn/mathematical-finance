@@ -1,2 +1,31 @@
 \newpage
 \section{Multi-Look Exotic Options}
+A \textit{Multi-Look} Option is any derivative where the payoff depends on the spot price at a discrete number of dates over the life of the contract. That is, their payoff can be written as $\text{Payoff} = f\left(S_{t_1},\dots,S_{t_n}\right)$ for some fixed function $f$. Common examples include Asian Options and Discrete Barrier Options. 
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{9.1:} Reason about the difference in price for a discrete barrier option, vanilla option and continuous barrier option. 
+\end{tcolorbox}
+\begin{proof}
+    In chapter eight we reason in that a continuous barrier option must trade less than a vanilla. As discrete barrier options are observed less frequently than their continuous counterparts, they effectively have less chance of being knocked in or out. The difference in price then depends on which is more favorable
+    \begin{align*}
+        & \text{Discrete Knock-In} < \text{Continuous Knock-In} < \text{Vanilla} \\
+        & \text{Continuous Knock-Out} < \text{Discrete Knock-Out} < \text{Vanilla}
+    \end{align*}
+\end{proof}
+
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{9.2:} Reason about the difference in price between an Asian option and a vanilla option for the same strike and maturity.
+\end{tcolorbox}
+\begin{proof}
+    
+\end{proof}
+
+
+\begin{tcolorbox}[colframe=black,colback=gray!5,boxrule=0.5pt]
+\textbf{9.6:} Show that there is an analytic formulae for an Asian option where the geometric mean is used. How does the price differ to an ordinary Asian option?  
+\end{tcolorbox}
+\begin{proof}
+    Recall that the geometric mean of the asset prices $\Bar{S}$ is given by 
+    $$\Bar{S} = \exp\left(\frac{1}{T}\int_0^T\ln S_t dt\right)$$
+\end{proof}
